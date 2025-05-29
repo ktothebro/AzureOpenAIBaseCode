@@ -1,0 +1,9 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/schemas/2016-06-01/workflowdefinition.json#",
+    "actions": {},
+    "triggers": {},
+    "outputs": {}
+  },
+  "parameters": {}
+}

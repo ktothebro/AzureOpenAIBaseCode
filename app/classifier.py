@@ -1,14 +1,18 @@
-import openai
+from openai import OpenAI
 from config import API_KEY, ENDPOINT
 
+# Create a client using your Azure OpenAI endpoint
+client = OpenAI(
+    api_key=API_KEY,
+    base_url=ENDPOINT
+)
+
 def classify_ticket(text):
-    openai.api_key = API_KEY
-    openai.api_base = ENDPOINT
-    response = openai.ChatCompletion.create(
-        engine='gpt-35-turbo',
+    response = client.chat.completions.create(
+        model="gpt-4o",  # 👈 Replace with your Azure *deployment name*, not model name
         messages=[
-            {'role': 'system', 'content': 'Classify the IT support issue.'},
-            {'role': 'user', 'content': f'{text}'}
+            {"role": "system", "content": "Classify the IT support issue."},
+            {"role": "user", "content": text}
         ]
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content.strip()
